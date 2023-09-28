@@ -2,14 +2,14 @@ import os
 from flask import (Flask, redirect, render_template, request,
                    send_from_directory, url_for)
 
-app = Flask(__name__, template_folder = os.path.abspath('template'))
-app.config['TEMPLATES_AUTO_RELOAD'] = True
-app.config['UPLOAD_FOLDER'] = os.path.abspath('uploads')
-app.config['SECRET_KEY'] = 'yt83t0ghasyg0j'
-app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
-
-@app.route('/', methods=['GET'])
+app = Flask(__name__)
+@app.route('/')
 def index():
+   print('Request for index page received')
+   return render_template('index.html')
+
+@app.route('/search')
+def search():
     args = request.args
     arg_search = args.get("search")
 
@@ -18,4 +18,3 @@ def index():
         get_request['search'] = arg_search
 
     return render_template('index.html', request=get_request)
-
