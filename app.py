@@ -1,5 +1,6 @@
-from flask import *
 import os
+from flask import (Flask, redirect, render_template, request,
+                   send_from_directory, url_for)
 
 app = Flask(__name__, template_folder = os.path.abspath('template'))
 app.config['TEMPLATES_AUTO_RELOAD'] = True
