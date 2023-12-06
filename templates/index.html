@@ -38,9 +38,9 @@
       </div>
     </header>
 
-{% if testconfig.key=='test' %}
+{% if azure_app_config.key=='test' %}
 <pre>
-  TOKEN: <u>{{ testconfig.value }}</u>
+  TEST: <u>{{ azure_app_config.value }}</u>
 </pre>
 {% endif %}
 

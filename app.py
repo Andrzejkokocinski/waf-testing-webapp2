@@ -1,23 +1,28 @@
 import os
-import json
-from flask import (Flask, request, render_template)
-
-### Managed Identity Credentials ###
+from flask import Flask, request, render_template
+from azure.appconfiguration.provider import load, SettingSelector
 from azure.identity import DefaultAzureCredential
+
+
+app = Flask(__name__)
+app.config['TEMPLATES_AUTO_RELOAD'] = True
+
+
 credential = DefaultAzureCredential()
 
 ### Azure App Configuration ###
 from azure.appconfiguration import AzureAppConfigurationClient
 AppConfigUrl = "https://appcs-demo.azconfig.io"
-AppConfigClient = AzureAppConfigurationClient(AppConfigUrl, credential)
+azure_app_config = load(
+                        endpoint=AppConfigUrl,
+                        keyvault_credential=credential,
+                        credential=credential
+                   )
 
-### APP ###
-app = Flask(__name__)
-app.config['TEMPLATES_AUTO_RELOAD'] = True
 
 ### App Insights ###
 AzureAppInsights_ConnectionString=''
-#AzureAppInsights_ConnectionString = AppConfigClient.get_configuration_setting(key="appinsight")
+AzureAppInsights_ConnectionString = azure_app_config.get_configuration_setting(key="appinsight")
 if AzureAppInsights_ConnectionString:
     from opencensus.ext.azure.trace_exporter import AzureExporter
     from opencensus.ext.flask.flask_middleware import FlaskMiddleware
@@ -42,8 +47,8 @@ def index():
     if arg_search != '':
         get_request['search'] = arg_search
 
-    return render_template('index.html', request=get_request, testconfig="")
+    return render_template('index.html', request=get_request, azure_app_config="")
 
 @app.route('/appconfig')
 def appconfig():
-    return render_template('index.html', testconfig=testconfig)
+    return render_template('index.html', azure_app_config=azure_app_config)
