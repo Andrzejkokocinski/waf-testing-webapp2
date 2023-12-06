@@ -1,5 +1,7 @@
 Flask==2.2.5
 gunicorn
+# Azure Managed Identity
+azure-identity
 # Azure App Configuration
 azure-appconfiguration
 # App Insights

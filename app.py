@@ -5,11 +5,20 @@ from flask import (Flask, request, render_template)
 appinsight=''
 config_settings=''
 
-#from azure.appconfiguration import AzureAppConfigurationClient
-#CONNECTION_STRING = "Endpoint=https://appcs-owasp-87562349798.azconfig.io;Id=HERh;Secret=+mh3UViOcXdzi7Rid3ZXNjRBjSxMOtxlqo75H2i0xlo="
-#client = AzureAppConfigurationClient.from_connection_string(CONNECTION_STRING)
-#config_settings = client.get_configuration_setting(key="testtoken")
-#appinsight = client.get_configuration_setting(key="appinsight")
+### Managed Identity Credentials ###
+from azure.identity import DefaultAzureCredential
+credential = DefaultAzureCredential()
+
+### Azure App Configuration ###
+from azure.appconfiguration import AzureAppConfigurationClient
+AppConfigUrl = "https://appcs-demo.azconfig.io"
+AppConfigClient = AzureAppConfigurationClient(AppConfigUrl, credential)
+
+AppConfig_test = AppConfigClient.get_configuration_setting(key="test")
+
+
+
+### APP ###
 
 app = Flask(__name__)
 app.config['TEMPLATES_AUTO_RELOAD'] = True
