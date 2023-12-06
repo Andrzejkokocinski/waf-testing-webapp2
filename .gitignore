@@ -399,3 +399,5 @@ FodyWeavers.xsd
 
 # Python Env
 demo/
+.deployment
+.vscode/*

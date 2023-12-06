@@ -8,4 +8,5 @@ azure-appconfiguration-provider==1.1.0b2
 opencensus
 opencensus-ext-flask
 opencensus-ext-azure
-
+# Azure Storage
+azure-storage-blob
