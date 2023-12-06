@@ -37,8 +37,12 @@
         </div>
       </div>
     </header>
-  
 
+{% if config_settings.key=='testtoken' %}
+<pre>
+  TOKEN: <u>{{ config_settings.value }}</u>
+</pre>
+{% endif %}
 
     <div class="container col-xl-10 col-xxl-8 px-4 py-5">
       <div class="row align-items-top g-lg-5 py-5">
@@ -90,7 +94,7 @@
     
     <div class="container">
       <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
-        <p class="col-md-4 mb-0 text-muted">&copy; 2022 WAF Playground</p>
+        <p class="col-md-4 mb-0 text-muted">v. 2023.12.06 Chris Polewiak</p>
     
         <a href="/" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
           <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>

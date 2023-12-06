@@ -1,2 +1,9 @@
-Flask==2.0.2
+Flask
+Werkzeug==2.2.2
 gunicorn
+# Azure App Configuration
+azure-appconfiguration
+# App Insights
+opencensus
+opencensus-ext-flask
+opencensus-ext-azure
