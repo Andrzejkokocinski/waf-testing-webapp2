@@ -38,9 +38,9 @@
       </div>
     </header>
 
-{% if azure_app_config.key=='test' %}
+{% if context.token %}
 <pre>
-  TEST: <u>{{ azure_app_config.value }}</u>
+  TEST: <u>{{context.token}}</u>
 </pre>
 {% endif %}
 
@@ -48,12 +48,13 @@
       <div class="row align-items-top g-lg-5 py-5">
         <div class="col-lg-7 text-center text-lg-start">
 
-{% if request.search %}
+
+{% if context.search %}
 
             <h2 class="fw-bold lh-1 mb-3">Search result</h2>
 
 {% autoescape false %}            
-            for: <b>'{{ request.search }}'</b>
+            for: <b>'{{ context.search }}'</b>
 {% endautoescape %}            
 
             <br><br>
