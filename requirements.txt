@@ -1,5 +1,4 @@
-Flask
-Werkzeug==2.2.2
+Flask==2.2.5
 gunicorn
 # Azure App Configuration
 azure-appconfiguration
@@ -7,3 +6,4 @@ azure-appconfiguration
 opencensus
 opencensus-ext-flask
 opencensus-ext-azure
+
